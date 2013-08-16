@@ -29,9 +29,10 @@
 
 	<script id="articleTable" type="text/html">
 		<table>
-			<tr><th class="tHeader date">Date</th><th class="tHeader">Article</th><th class="tHeader">Tags</th></tr>
+			<tr><td></td><th class="tHeader date">Date</th><th class="tHeader">Article</th><th class="tHeader">Tags</th></tr>
 		  {{#rows}}
-		  	<tr class="{{rowNumber}}"><td class="date">{{date}}</td><td class="article"><a href="{{url}}" target="_blank">{{article}}</a></td><td class="tag">{{tags}}</td></tr>
+		  	<tr class="{{rowNumber}}"><td class="light-type">{{rowNumber}}</td><td class="date">{{date}}</td><td class="article"><a href="{{url}}" target="_blank">{{article}}</a></td>
+		  	<td class="tag">{{#tags}}<a href="#">{{tag}}</a> {{/tags}}</td></tr>
 		  {{/rows}}
 	  </table>
 	</script>
@@ -39,11 +40,41 @@
 
 	<script type="text/javascript">
   document.addEventListener('DOMContentLoaded', function() {
-  	cleanDates(gData)
-  	pageTitle(gData)
-  	Sheetsee.makeTable(gData.reverse(), "#articleTable")
-  	Sheetsee.initiateTableFilter(gData, "#articleSearch", "#articleTable")
+  	var tagData = separateTags(gData)
+  	cleanDates(tagData)
+  	pageTitle(tagData)
+  	Sheetsee.makeTable(tagData.reverse(), "#articleTable")
+  	Sheetsee.initiateTableFilter(tagData, "#articleSearch", "#articleTable")
+  	
    }) 
+
+  function separateTags(data) {
+  	data.forEach(function findMultiTags(article) {
+  		if (article.tags === "") return
+  		if (article.tags.indexOf(',') >= 0) {
+  			var tagArray = parseTags(article.tags)
+  			var tagObjArray = arrayIntoObjects(tagArray)
+  			article.tags = tagObjArray
+  		}
+  		else {
+  			article.tags = [{"tag": article.tags}]
+  		}
+  	})
+  	console.log(data)
+  return data
+  }
+
+  function parseTags(bulkTags) {
+  	tagArray = bulkTags.split(', ')
+  	return tagArray
+  }
+  function arrayIntoObjects(array) {
+	  var tags = [];
+	  for (var i = 0; i < array.length; ++i)
+	    if (array[i] !== undefined) tags.push({ "tag" : array[i]});
+	  console.log("i'm the objects", tags)
+	  return tags;
+  }
 
 
   $('.tag').live("click", function(event){
