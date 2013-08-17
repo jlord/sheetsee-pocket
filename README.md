@@ -28,7 +28,11 @@ _Now go read some things in your Pocket and archive 'em. You know, make the data
 
 Once you've got some entries, checkout your spreadsheet, change the column headers to: **date, article, tags, url, except**. Renaming won't break anything. Also, even though it's archiving an except, I'm not using in this project. But maybe you can find a neat way to use them?
 
-While you're at your spreadsheet, you'll want to pusblish it to the web and get it's unique key. You'll find that by clicking File > Publish to the Web > Start Publishing, it will then display the key in a window. Copy it!
+While you're at your spreadsheet, you'll want to pusblish it to the web and get it's unique key. You can find the publish settings in the File menu by clicking *File > Publish to the Web*. Then click the "Start publishing" button.
+
+![start publishing](https://raw.github.com/polotek/sheetsee-pocket/gh-pages/ss-publish-web.png)  
+
+It will then display the key in a window. Copy it!
 
 ![get key](https://raw.github.com/jllord/sheetsee-cache/master/img/key.png)
 
