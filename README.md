@@ -1,6 +1,6 @@
 # Hi!
 
-![screenshot](https://raw.github.com/jlord/sheetsee-pocket/master/ss-pocket-ss.png)
+![screenshot](https://raw.github.com/jlord/sheetsee-pocket/gh-pages/ss-pocket-ss.png)
 
 A website for your Pocket article archive. Fork-n-Go set up.
 
@@ -14,7 +14,7 @@ It would still be connected to my spreadsheet with my Pocket archive - but that'
 
 If you don't have already have an account with both [Pocket](http://www.getpocket.com) (a read-it-later service) and [ifttt.com](http://www.ifttt.com) go ahead and create em. If you don't have a [Google](http://drive.google.com) account, get on that too. 
 
-![ifttt](https://raw.github.com/jlord/sheetsee-pocket/master/ifttt.png)
+![ifttt](https://raw.github.com/jlord/sheetsee-pocket/gh-pages/ifttt.png)
 
 In ifttt.com set up [this recipe](https://ifttt.com/recipes/111549) that will take your each article you archive on Pocket and add it to a row in a Google Spreadsheet.
 
@@ -28,7 +28,7 @@ While you're at your spreadsheet, you'll want to pusblish it to the web and get 
 
 Now, visit your fork of this repository. Click the `index.html` file, and then when that page loads, click Edit.
 
-![ifttt](https://raw.github.com/jlord/sheetsee-pocket/master/indexedit.png)
+![ifttt](https://raw.github.com/jlord/sheetsee-pocket/gh-pages/indexedit.png)
 
 Scroll to find **line 61** (or thereabouts), it looks like: 
 
