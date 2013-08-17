@@ -1,9 +1,11 @@
 <html>
 	<head>
 		<title>Pocket Reads</title>
+    <meta charset="UTF-8">
 		<script type="text/javascript" src="js/ICanHaz.js"></script> 
 		<script type="text/javascript" src='js/jquery.js '></script>
 		<script type="text/javascript" src='js/sheetsee.js'></script>
+    <script type="text/javascript" src='js/site'></script>
 		<link rel="shortcut icon" href="https://raw.github.com/jlord/sheetsee-pocket/master/favicon-p.png"/>
 		<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 		<link media="screen" rel="stylesheet" type="text/css" href="/css/style.css"> 
@@ -12,24 +14,37 @@
 	<div id="wrapper">
 		<div id="title"></div>
 		<ul class="nav">
-			<li>ARTICLES I'VE READ AND ARCHIVED</li>
+			<li>ARTICLES READ AND ARCHIVED</li>
 			<li>POWERED BY <a href="http://jlord.gitub.io/sheetsee.js" target="_blank">SHEETSEE.JS</a> AND <a href="http://www.ifttt.com" target="blank">IFTTT.COM</a> (AND <a href="http://www.getpocket.com/" target="_blank">POCKET</a>)</li>
-			<li><a href="http://www.github.com/jlord/sheetsee-pocket" target="_blank">SET UP YOUR ARCHIVE</a></li>
+      <li><a class="dim" href="#info" target="_blank">INFO</a><span class="dim"> or</span></li>
+			<li><a class="dim" href="http://www.github.com/jlord/sheetsee-pocket#hi" target="_blank">SET UP YOUR ARCHIVE</a></li>
 		</ul>
+
 		<div id="filters" class="container">
-			<input id="articleSearch" type="text" placeholder="filter by.."></input>
-			<span class="clear sml-button">Clear</span>
-		</div>
+			<input id="articleSearch" type="text" placeholder="Search for.."></input>
+			<span class="clear sml-button">Clear</span> 
+      <h3>Sort by tag <span id="tags"></span></h3>    
+  </div>
 		<div id="articleTable"></div>
+    <div id="info">
+      <h2>INFO</h2>
+      <p>This is an open source, easy to replicate project by <a href="http://www.twitter.com/jllord" target="_blank">@jllord</a>. If you use <a href="http://www.getpocket.com" target="_blank">Pocket</a> to save articles for later, you can also use <a href="http://www.ifttt.com" target="_blank">ifttt.com</a> (if this than that) to automate sending the article details to a Google Spreadsheet once you've archived it. Once you have a Google Spreadsheet you can use <a href="http://jlord.github.io/sheetsee.js" target="_blank">sheetsee.js</a> to turn into a website like so. So many possibilities! See the <a href="http://www.github.com/jlord/sheetsee-pocket#hi" target="_blank">documentation</a> to learn how to set up your own or contribute code!</p>
+    </div>
 	</div><!-- end wrapper -->
 
 	<script id="title" type="text/html">
 		<h1><span class="highlighted">{{numArticles}}</span> Articles from Pocket</h1>
 	</script>
 
+  <script id="tags" type="text/html">
+    {{#rows}}
+      <span href="#" class="tag sml-button">{{.}}</span>
+    {{/rows}}
+  </script>
+
 	<script id="articleTable" type="text/html">
 		<table>
-			<tr><td></td><th class="tHeader date">Date</th><th class="tHeader">Article</th><th class="tHeader">Tags</th></tr>
+			<tr><th class="fancy">&#8470;</th><th class="tHeader date">Date</th><th class="tHeader">Article</th><th class="tHeader">Tags</th></tr>
 		  {{#rows}}
 		  	<tr class="{{rowNumber}}"><td class="light-type">{{rowNumber}}</td><td class="date">{{date}}</td><td class="article"><a href="{{url}}" target="_blank">{{article}}</a></td>
 		  	<td class="tag">{{#tags}}<a href="#">{{tag}}</a> {{/tags}}</td></tr>
@@ -41,61 +56,21 @@
 	<script type="text/javascript">
   document.addEventListener('DOMContentLoaded', function() {
   	var tagData = separateTags(gData)
+  	drawTags(tagData)
   	cleanDates(tagData)
   	pageTitle(tagData)
   	Sheetsee.makeTable(tagData.reverse(), "#articleTable")
   	Sheetsee.initiateTableFilter(tagData, "#articleSearch", "#articleTable")
+
+    $(document).on("click", ".tag", function(event){
+      var tag = $(event.target).text()
+      var tagFilter = getTagMatches(tagData, tag)
+      Sheetsee.makeTable(tagFilter.reverse(), "#articleTable")
+    })
   	
-   }) 
-
-  function separateTags(data) {
-  	data.forEach(function findMultiTags(article) {
-  		if (article.tags === "") return
-  		if (article.tags.indexOf(',') >= 0) {
-  			var tagArray = parseTags(article.tags)
-  			var tagObjArray = arrayIntoObjects(tagArray)
-  			article.tags = tagObjArray
-  		}
-  		else {
-  			article.tags = [{"tag": article.tags}]
-  		}
-  	})
-  	console.log(data)
-  return data
-  }
-
-  function parseTags(bulkTags) {
-  	tagArray = bulkTags.split(', ')
-  	return tagArray
-  }
-  function arrayIntoObjects(array) {
-	  var tags = [];
-	  for (var i = 0; i < array.length; ++i)
-	    if (array[i] !== undefined) tags.push({ "tag" : array[i]});
-	  console.log("i'm the objects", tags)
-	  return tags;
-  }
+  }) 
 
 
-  $('.tag').live("click", function(event){
-  	console.log(this)
-  	// will be making tag clicks filter by tag
-  })
-
-  function pageTitle(data) {
-  	var amount = data.length
-  	var contents = ich.title({
-    	numArticles: amount
-  	})
-  $('#title').html(contents)
-  }
-
-  function cleanDates(data) {
-  	data.forEach(function (item) {
-  		item.date = item.date.split(" at")[0]
-  	})
-  return data
-  }
 	</script>
 
 </body>

@@ -1,33 +1,42 @@
-body {font-family: Montserrat; font-size: 8px; padding: 10px 0px 40px 0px; color: #333;}
+body {font-family: Montserrat; font-size: 13px; padding: 10px 0px 40px 0px; color: #333;}
 
 h1 {font-size: 48px; margin-bottom: 20px;}
 .highlighted {color: #06DDA0; opacity: 1; transition: opacity .25s ease-in-out;}
-.highlighted:hover {
-      opacity: 0.5;
-      }
+.highlighted:hover {opacity: 0.5;}
 a {text-decoration: none; color: #333;}
 a:hover {padding-bottom: 1px; border-bottom: 1px dotted #333;}
-.light-type {color: #06DDA0;}
+p a {color: #06DDA0;}
+
+.light-type {color: #777;} /* #06DDA0 */
+.dim {color: #acacac;}
+.fancy {font-family: baskerville, garamond, serif; font-weight: lighter; font-style: italic;}
 
 #wrapper {margin: 0px auto; max-width: 900px; padding-top: 40px; }
 
 ul.nav {list-style: none; margin: 0px; padding: 0px; color: #06DDA0;}
 ul.nav li {display: inline; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; padding-right: 4px;}
 ul.nav a {color: #06DDA0; border-bottom: 1px dotted #06DDA0;}
+ul.nav a.dim {color: #acacac; border-bottom: 1px dotted #acacac;}
 ul.nav a:hover {font-weight: 900;}
 
-#filters {padding: 20px 0px;}
+#filters {padding: 30px 0px; overflow: auto;}
 
 table {border-spacing: 0px; min-width: 900px; margin: 0 auto;}
 th {padding: 10px}
 td, text {padding: 5px 10px; font-size: 12px; font-weight: lighter; line-height: 18px;}
+td a:visited {color: #777;}
+td.date {min-width: 119px;}
+/*td.article {max-width: 400px;}*/
 tr {text-align: left; vertical-align: top; padding: 4px 0px;}
 tr:nth-child(2n+2) {background: #eee;}
 .tHeader {cursor: pointer;}
 .tHeader::after {content: " \2193 \2191 "; font-size: 10px; padding-left: 3px;}
 
-input {margin: 12px 0px; border: none; border-bottom: 1px solid #333; background-color: transparent; padding: 0px; color: #acacac; font-size: 13px; height: 22px;}
+input {margin: 12px 0px; border: none; border-bottom: 1px solid #333; background-color: transparent; padding: 0px; color: #acacac; font-size: 13px; height: 22px; font-family: Montserrat;}
 
 .sml-button {border-radius: 1px; cursor: pointer; margin-left: 4px; padding: 4px 6px; background-color: #06DDA0; font-size: 11px; text-transform: uppercase; letter-spacing: .1em; text-align: center; color: #fff; font-family: Montserrat;}
 .sml-button:hover {background: #eee;}
 .button-pressed {background: #0CCC96;}
+
+#info {padding: 30px 0px;}
+
