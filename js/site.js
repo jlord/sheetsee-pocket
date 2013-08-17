@@ -1,5 +1,3 @@
-  // takes in data once tags have been turned
-  // into an array of objects
   function existingTagsList(data) {
   	var existingTags = []
   	data.forEach(function getTagArray(row) {
@@ -57,7 +55,6 @@
 
   function drawTags(data) {
     var tag = existingTagsList(data)
-    console.log(tag)
     var contents = ich.tags({
       rows: tag
     })

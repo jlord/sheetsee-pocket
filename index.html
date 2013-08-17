@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
 		<script type="text/javascript" src="js/ICanHaz.js"></script> 
 		<script type="text/javascript" src='js/jquery.js '></script>
+    <script type="text/javascript" src='js/tabletop.js'></script>
+    <script type="text/javascript" src='js/site.js'></script>
 		<script type="text/javascript" src='js/sheetsee.js'></script>
-    <script type="text/javascript" src='js/site'></script>
+    
 		<link rel="shortcut icon" href="https://raw.github.com/jlord/sheetsee-pocket/master/favicon-p.png"/>
 		<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-		<link media="screen" rel="stylesheet" type="text/css" href="/css/style.css"> 
+		<link media="screen" rel="stylesheet" type="text/css" href="css/style.css"> 
 	</head>
 <body>
 	<div id="wrapper">
@@ -23,9 +25,11 @@
 		<div id="filters" class="container">
 			<input id="articleSearch" type="text" placeholder="Search for.."></input>
 			<span class="clear sml-button">Clear</span> 
-      <h3>Sort by tag <span id="tags"></span></h3>    
-  </div>
+      <h3>Tags<span id="tags"></span></h3>    
+    </div>
+
 		<div id="articleTable"></div>
+
     <div id="info">
       <h2>INFO</h2>
       <p>This is an open source, easy to replicate project by <a href="http://www.twitter.com/jllord" target="_blank">@jllord</a>. If you use <a href="http://www.getpocket.com" target="_blank">Pocket</a> to save articles for later, you can also use <a href="http://www.ifttt.com" target="_blank">ifttt.com</a> (if this than that) to automate sending the article details to a Google Spreadsheet once you've archived it. Once you have a Google Spreadsheet you can use <a href="http://jlord.github.io/sheetsee.js" target="_blank">sheetsee.js</a> to turn into a website like so. So many possibilities! See the <a href="http://www.github.com/jlord/sheetsee-pocket#hi" target="_blank">documentation</a> to learn how to set up your own or contribute code!</p>
@@ -44,7 +48,7 @@
 
 	<script id="articleTable" type="text/html">
 		<table>
-			<tr><th class="fancy">&#8470;</th><th class="tHeader date">Date</th><th class="tHeader">Article</th><th class="tHeader">Tags</th></tr>
+			<tr><th class="fancy">&#8470;</th><th class="tHeader date">Date</th><th class="tHeader">Article</th><th>Tags</th></tr>
 		  {{#rows}}
 		  	<tr class="{{rowNumber}}"><td class="light-type">{{rowNumber}}</td><td class="date">{{date}}</td><td class="article"><a href="{{url}}" target="_blank">{{article}}</a></td>
 		  	<td class="tag">{{#tags}}<a href="#">{{tag}}</a> {{/tags}}</td></tr>
@@ -52,26 +56,27 @@
 	  </table>
 	</script>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var URL = "0Ao5u1U6KYND7dERheVpFZThEUkdPZnFXXzMxTzJ3dEE"
+      Tabletop.init( { key: URL, callback: showInfo, simpleSheet: true } )
+    }) 
+      
+    function showInfo(data) {
+      var gData = separateTags(data)
+      drawTags(gData)
+      cleanDates(gData)
+      pageTitle(gData)
+      Sheetsee.makeTable(gData.reverse(), "#articleTable")
+      Sheetsee.initiateTableFilter(gData, "#articleSearch", "#articleTable")
 
-	<script type="text/javascript">
-  document.addEventListener('DOMContentLoaded', function() {
-  	var tagData = separateTags(gData)
-  	drawTags(tagData)
-  	cleanDates(tagData)
-  	pageTitle(tagData)
-  	Sheetsee.makeTable(tagData.reverse(), "#articleTable")
-  	Sheetsee.initiateTableFilter(tagData, "#articleSearch", "#articleTable")
-
-    $(document).on("click", ".tag", function(event){
-      var tag = $(event.target).text()
-      var tagFilter = getTagMatches(tagData, tag)
-      Sheetsee.makeTable(tagFilter.reverse(), "#articleTable")
-    })
-  	
-  }) 
-
-
-	</script>
+      $(document).on("click", ".tag", function(event){
+        var tag = $(event.target).text()
+        var tagFilter = getTagMatches(gData, tag)
+        Sheetsee.makeTable(tagFilter.reverse(), "#articleTable")
+      })
+    }
+  </script>
 
 </body>
 </html>

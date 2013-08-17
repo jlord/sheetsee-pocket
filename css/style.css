@@ -24,9 +24,8 @@ ul.nav a:hover {font-weight: 900;}
 table {border-spacing: 0px; min-width: 900px; margin: 0 auto;}
 th {padding: 10px}
 td, text {padding: 5px 10px; font-size: 12px; font-weight: lighter; line-height: 18px;}
-td a:visited {color: #777;}
+td.article a:visited {color: #777;}
 td.date {min-width: 119px;}
-/*td.article {max-width: 400px;}*/
 tr {text-align: left; vertical-align: top; padding: 4px 0px;}
 tr:nth-child(2n+2) {background: #eee;}
 .tHeader {cursor: pointer;}
