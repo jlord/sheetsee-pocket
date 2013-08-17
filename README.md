@@ -6,9 +6,11 @@ A website for your Pocket article archive. Fork-n-Go set up.
 
 ### Fork-n-Go
 
-This repository only has a gh-pages with web files - that means as soon as you fork it, you have a live version yourself! You'd be able to visit it at yourGitHubName.github.io/sheetsee-pocket. 
+This repository only has a **gh-pages branch** with web files - that means as soon as you **fork** it, you have a live version yourself! You'd be able to visit it at `yourGitHubName.github.io/sheetsee-pocket`. 
 
 It would still be connected to my spreadsheet with my Pocket archive - but that's easy to change!
+
+**Fork this!**
 
 #### Use ifttt.com for Pocket -> Spreadsheet
 
@@ -16,15 +18,19 @@ If you don't have already have an account with both [Pocket](http://www.getpocke
 
 ![ifttt](https://raw.github.com/jlord/sheetsee-pocket/gh-pages/ifttt.png)
 
-In ifttt.com set up [this recipe](https://ifttt.com/recipes/111549) that will take your each article you archive on Pocket and add it to a row in a Google Spreadsheet.
+In ifttt.com set up [this recipe](https://ifttt.com/recipes/111549) that will take each article you archive on Pocket and add it to a row in a Google Spreadsheet.
 
-_Now go read some things in your Pocket and archiv`e em. You know, make the datas._
+_Now go read some things in your Pocket and archive 'em. You know, make the datas._
+
+#### Set up Spreadsheet
 
 Once you've got some entries, checkout your spreadsheet, change the column headers to: **date, article, tags, url, except**. Renaming won't break anything. Also, even though it's archiving an except, I'm not using in this project. But maybe you can find a neat way to use them?
 
 While you're at your spreadsheet, you'll want to pusblish it to the web and get it's unique key. You'll find that by clicking File > Publish to the Web > Start Publishing, it will then display the key in a window. Copy it!
 
 ![get key](https://raw.github.com/jllord/sheetsee-cache/master/img/key.png)
+
+#### Paste Your Spreadsheet Key
 
 Now, visit your fork of this repository. Click the `index.html` file, and then when that page loads, click Edit.
 
@@ -39,6 +45,6 @@ Scroll to find **line 61** (or thereabouts), it looks like:
 			Tabletop.init( { key: URL, callback: showInfo, simpleSheet: true } ) 
     }) 
 ```
-Paste your spreadsheet's key in the place of 0Ao5u...
+Paste your spreadsheet's key in the place of `0Ao5u1U6K...`
 
-At the bottom of the page, click Commit. You're done! Visit your site! 
+**At the bottom of the page, click Commit. You're done! Visit your site!**
