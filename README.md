@@ -12,6 +12,8 @@ It would still be connected to my spreadsheet with my Pocket archive - but that'
 
 **Fork this!**
 
+If you don't see your site, you may need to take [a few extra steps](https://help.github.com/articles/creating-pages-with-the-automatic-generator) to get gh-pages enables.
+
 #### Use ifttt.com for Pocket -> Spreadsheet
 
 If you don't have already have an account with both [Pocket](http://www.getpocket.com) (a read-it-later service) and [ifttt.com](http://www.ifttt.com) go ahead and create em. If you don't have a [Google](http://drive.google.com) account, get on that too. 
