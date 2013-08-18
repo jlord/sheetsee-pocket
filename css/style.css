@@ -20,6 +20,7 @@ ul.nav a.dim {color: #acacac; border-bottom: 1px dotted #acacac;}
 ul.nav a:hover {font-weight: 900;}
 
 #filters {padding: 30px 0px; overflow: auto;}
+#tags {line-height: 25px;}
 
 table {border-spacing: 0px; min-width: 900px; margin: 0 auto;}
 th {padding: 10px}
