@@ -12,6 +12,8 @@ It would still be connected to my spreadsheet with my Pocket archive - but that'
 
 **Fork this!**
 
+If you don't see your site, you may need to take [a few extra steps](https://help.github.com/articles/creating-pages-with-the-automatic-generator) to get gh-pages enables.
+
 #### Use ifttt.com for Pocket -> Spreadsheet
 
 If you don't have already have an account with both [Pocket](http://www.getpocket.com) (a read-it-later service) and [ifttt.com](http://www.ifttt.com) go ahead and create em. If you don't have a [Google](http://drive.google.com) account, get on that too. 
@@ -26,7 +28,11 @@ _Now go read some things in your Pocket and archive 'em. You know, make the data
 
 Once you've got some entries, checkout your spreadsheet, change (or create if they're not in there automatically) the column headers to: **date, article, tags, url, excerpt**. Renaming won't break anything. Also, even though it's archiving an except, I'm not using in this project. But maybe you can find a neat way to use them?
 
-While you're at your spreadsheet, you'll want to pusblish it to the web and get it's unique key. You'll find that by clicking **File > Publish to the Web > Start Publishing**, it will then display the key in a window. Copy it!
+While you're at your spreadsheet, you'll want to pusblish it to the web and get it's unique key. You'll find that by clicking **File > Publish to the Web**. Then click the "Start publishing" button.
+
+![start publishing](https://raw.github.com/polotek/sheetsee-pocket/gh-pages/ss-publish-web.png)  
+
+It will then display the key in a window. Copy it!
 
 ![get key](https://raw.github.com/jllord/sheetsee-cache/master/img/key.png)
 
