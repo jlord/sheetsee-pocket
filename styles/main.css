@@ -887,7 +887,8 @@ textarea {
   margin-top: 50px;
 }
 #section-intro {
-  background-image: url('../images/backgrounds/bg1.jpg');
+  /*background-image: url('../images/backgrounds/bg1.jpg');*/
+  background: linear-gradient(to right, #303,#606);
   background-position: center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -3629,17 +3630,17 @@ textarea {
 
 .portfolio-layout2 .portfolio-item {
   margin-bottom: 30px;
-  animation: slide-up 0.4s ease;
+  animation: slide-up 0.5s ease;
 }
 
 @keyframes slide-up {
     0% {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateX(50px);
     }
     100% {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(0);
     }
 }
 
