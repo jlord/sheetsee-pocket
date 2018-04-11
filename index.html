@@ -1,81 +1,279 @@
-<html>
-	<head>
-		<title>Pocket Reads</title>
-    <meta charset="UTF-8">
-		<script type="text/javascript" src="js/ICanHaz.js"></script> 
-		<script type="text/javascript" src='js/jquery.js '></script>
+<!DOCTYPE html>
+<!--[if IE 7 ]>    <html lang="en-gb" class="isie ie7 oldie no-js"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en-gb" class="isie ie8 oldie no-js"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en-gb" class="isie ie9 no-js"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en-gb" xml:lang="en-gb" class="no-js"> <!--<![endif]-->
+
+<head>
+	<meta charset="utf-8">
+    <!--[if lt IE 9]> 
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <![endif]-->
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="jThemes Studio">
+    <meta name="robots" content="index, follow">
+	<meta name = "viewport" content = "user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    
+    <script type="text/javascript" src="js/ICanHaz.js"></script> 
+    <script type="text/javascript" src='js/jquery.js '></script>
     <script type="text/javascript" src='js/tabletop.js'></script>
     <script type="text/javascript" src='js/site.js'></script>
-		<script type="text/javascript" src='js/sheetsee.js'></script>
+	<script type="text/javascript" src='js/sheetsee.js'></script>
+
+
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="ico/favicon.ico">
+
+    <!--[if lt IE 9]>
+        <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
     
-		<link rel="shortcut icon" href="https://raw.github.com/jlord/sheetsee-pocket/master/favicon-p.png"/>
-		<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-		<link media="screen" rel="stylesheet" type="text/css" href="css/style.css"> 
-	</head>
-<body>
-	<div id="wrapper">
-		<div id="title"></div>
-		<ul class="nav">
-			<li>ARTICLES READ AND ARCHIVED</li>
-			<li>POWERED BY <a href="http://jlord.gitub.io/sheetsee.js" target="_blank">SHEETSEE.JS</a> AND <a href="http://www.ifttt.com" target="blank">IFTTT.COM</a> (AND <a href="http://www.getpocket.com/" target="_blank">POCKET</a>)</li>
-      <li><a class="dim" href="#info" target="_blank">INFO</a><span class="dim"> or</span></li>
-			<li><a class="dim" href="http://www.github.com/jlord/sheetsee-pocket#hi" target="_blank">SET UP YOUR ARCHIVE</a></li>
-		</ul>
+   	<!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,900,900italic,700italic,400italic%7CFjalla+One' rel='stylesheet' type='text/css'>
+    
+    <!-- Icon-Font -->
+    <link rel="stylesheet" href="font-awesome/font-awesome/css/font-awesome.min.css" type="text/css">
+    <!--[if IE 7]>
+    	<link rel="stylesheet" href="font-awesome/font-awesome/css/font-awesome-ie7.min.css" type="text/css">
+    <![endif]-->
+    
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="owl-carousel/owl.carousel.css" type="text/css">
+    <link rel="stylesheet" href="lightbox/css/lightbox.css" type="text/css">
+    <link rel="stylesheet" href="styles/animate.min.css" type="text/css">
+    <link rel="stylesheet" href="styles/main.css" type="text/css">
+    
+	<title>Digital Learning</title>
+    
+    <script type="text/javascript" src="js/modernizr.min.js"></script>
+    <script type="text/javascript" src="pace/pace.min.js"></script>
 
-		<div id="filters" class="container">
-			<input id="articleSearch" type="text" placeholder="Search for.."></input>
-			<span class="clear sml-button">Clear</span> 
-      <h3>Tags <span id="tags"></span>   
-    </div>
-
-		<div id="articleTable"></div>
-
-    <div id="info">
-      <h2>INFO</h2>
-      <p>This is an open source, easy to replicate project by <a href="http://www.twitter.com/jllord" target="_blank">@jllord</a>. If you use <a href="http://www.getpocket.com" target="_blank">Pocket</a> to save articles for later, you can also use <a href="http://www.ifttt.com" target="_blank">ifttt.com</a> (if this than that) to automate sending the article details to a Google Spreadsheet once you've archived it. Once you have a Google Spreadsheet you can use <a href="http://jlord.github.io/sheetsee.js" target="_blank">sheetsee.js</a> to turn into a website like so. So many possibilities! See the <a href="http://www.github.com/jlord/sheetsee-pocket#hi" target="_blank">documentation</a> to learn how to set up your own or contribute code!</p>
-    </div>
-	</div><!-- end wrapper -->
-
-	<script id="title" type="text/html">
-		<h1><span class="highlighted">{{numArticles}}</span> Articles from Pocket</h1>
+    <script type="text/javascript">
+	window.scrollTo(0,1);
 	</script>
 
-  <script id="tags" type="text/html">
-    {{#rows}}
-      <span href="#" class="tag sml-button">{{.}}</span>
-    {{/rows}}
-  </script>
+</head>
 
-	<script id="articleTable" type="text/html">
-		<table>
-			<tr><th class="fancy">&#8470;</th><th class="date">Date</th><th class="">Article</th><th>Tags</th></tr>
-		  {{#rows}}
-		  	<tr class="{{rowNumber}}"><td class="light-type">{{rowNumber}}</td><td class="date">{{date}}</td><td class="article"><a href="{{url}}" target="_blank">{{article}}</a></td>
-		  	<td class="tag">{{#tags}}<a href="#">{{tag}}</a> {{/tags}}</td></tr>
-		  {{/rows}}
-	  </table>
+<body>
+	<div id="page-loader">
+        <div class="loader-square loader-square-1">
+        	<div class="loader-square-content">
+            	<div class="loader-square-inner bg-pattern dark-screen"></div>
+            </div>
+        </div>
+        <div class="loader-square loader-square-2">
+        	<div class="loader-square-content">
+            	<div class="loader-square-inner bg-pattern dark-screen"></div>
+            </div>
+        </div>
+        <div class="loader-square loader-square-3">
+        	<div class="loader-square-content">
+            	<div class="loader-square-inner bg-pattern dark-screen"></div>
+            </div>
+        </div>
+        <div class="loader-square loader-square-4">
+        	<div class="loader-square-content">
+            	<div class="loader-square-inner bg-pattern dark-screen"></div>
+            </div>
+        </div>
+        <div class="loader-square loader-square-5">
+        	<div class="loader-square-content">
+            	<div class="loader-square-inner bg-pattern dark-screen"></div>
+            </div>
+        </div>
+        <div class="loader-square loader-square-6">
+        	<div class="loader-square-content">
+            	<div class="loader-square-inner bg-pattern dark-screen"></div>
+            </div>
+        </div>
+        <div class="loader-square loader-square-7">
+        	<div class="loader-square-content">
+            	<div class="loader-square-inner bg-pattern dark-screen"></div>
+            </div>
+        </div>
+        <div class="loader-square loader-square-8">
+        	<div class="loader-square-content">
+            	<div class="loader-square-inner bg-pattern dark-screen"></div>
+            </div>
+        </div>
+        <div class="loader-square loader-square-9">
+        	<div class="loader-square-content">
+            	<div class="loader-square-inner bg-pattern dark-screen"></div>
+            </div>
+        </div>
+        <div class="loader-container">
+        	<div class="loader-content">
+        		<h1 class="heading-enormous no-margin"></h1>
+            </div>
+        </div><!-- .loader-container -->
+        <div class="loader-footer">
+        	<p>
+           	</p>
+        </div>
+    </div><!-- #page-loader -->
+    
+	<div id="all">
+    	<div id="menu">
+        	<div class="menu-container">
+            	<div class="menu-inner">
+            		<div class="logo-container">
+                        <h5 style="color: #00ffcc;">Digital Learning</h5>
+                    </div>
+
+                    <div class="menu-content">
+                        <form id="form-search">
+                            <input id="articleSearch" type="text" placeholder="Search...">
+                            <div class="submit-container">
+                            	<input type="submit" value="Send">
+                        	</div>
+                        </form>
+                    </div>
+
+                    <nav class="main-navigation" id="tags">
+                        
+                    </nav>
+                    
+                    
+
+                    <div class="menu-bottom">
+                    	<!--
+                    	<div class="text-center">
+                            <a href="#"><i class="fa fa-facebook-square"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-dribbble"></i></a>
+                            <a href="#"><i class="fa fa-google-plus"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </div>
+                        <div class="margin-10"></div>
+                    	-->
+                        <!-- <p><span class="text-white"> Copyright &copy; 2015 | vmkazakoff</span></p> -->
+                    </div>
+        		</div><!-- .menu-inner -->
+            </div><!-- .menu-container -->
+        </div><!-- #menu -->
+		
+        <div id="menu-trigger">
+        	<i class="fa fa-reorder"></i>
+        </div>
+        
+		
+		<!-- SECTIONS -->	
+
+		<section class="single-page" id="section-intro">
+            <div class="section-content bg-pattern dark-screen" style="vertical-align: top;">
+            	<div class="container">
+
+                    <div id="portfolio2" class="portfolio-layout2 row">
+
+						<article class="col-xs-12 portfolio-item filter-people">
+					    	<div class="portfolio-item-content">
+		                    	Загрузка... 
+		                    </div>
+		                </article>
+
+
+                    </div><!-- #portfolio2 -->
+
+               	</div><!-- .container -->
+            </div><!-- .section-content -->
+        </section>      
+
+        <!-- /SECTIONS -->   
+        
+      	<div id="page-screen-cover"></div>
+    </div><!-- #all -->
+
+	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="owl-carousel/owl.carousel.min.js"></script>
+	<script type="text/javascript" src="lightbox/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
+	<script type="text/javascript" src="js/jquery.nav.min.js"></script>
+    <script type="text/javascript" src="js/jquery.scrollTo.min.js"></script>
+    <script type="text/javascript" src="js/isotope.pkgd.min.js"></script>
+    <script type="text/javascript" src="js/jquery.inview.min.js"></script>
+	<script type="text/javascript" src="js/custom.js"></script>
+
+	
+
+
+
+
+	<script id="tags" type="text/html">
+	  	<ul id="isotope-filter-list2">
+	        <li class="active"><a class="isotope-filter" data-filter="*" href="#">All</a></li>
+	    	{{#rows}}
+	    		<li><a class="isotope-filter" data-filter=".{{.}}" href="#">{{.}}</a></li>
+	    	{{/rows}}
+	    </ul>
+	</script>
+
+	<script id="portfolio2" type="text/html">
+	{{#rows}}
+		<article class="col-xs-12 portfolio-item filter-people">
+			
+		    	<div class="portfolio-item-content">
+		    		<a data-toggle="collapse" href="#collapse{{rowNumber}}" role="button" aria-expanded="false" aria-controls="collapseExample" class="collapcelink collapsed">
+		            	<p><span class="collapseicon"></span> {{{title}}}</p> 
+		            </a>
+
+					<div class="collapse" id="collapse{{rowNumber}}">
+					  <div class="card card-body">
+					  	<div class="line"></div>
+					    {{{article}}}
+					  </div>
+					</div>
+
+		            <br/>{{#tags}}<a class="dltag isotope-filter" data-filter=".{{tag}}" href="#"> {{tag}} </a> {{/tags}}
+
+		        </div>
+	    	
+		</article>
+	{{/rows}}
 	</script>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      var URL = "0Ao5u1U6KYND7dERheVpFZThEUkdPZnFXXzMxTzJ3dEE"
-      Tabletop.init( { key: URL, callback: showInfo, simpleSheet: true } )
-    }) 
-      
-    function showInfo(data) {
-      var gData = separateTags(data)
-      drawTags(gData)
-      cleanDates(gData)
-      pageTitle(gData)
-      Sheetsee.makeTable(gData.reverse(), "#articleTable")
-      Sheetsee.initiateTableFilter(gData, "#articleSearch", "#articleTable")
+      	var URL = "1R9CHdBpKsF9HJWFLw6nOM82PmsdAwz0QZRPmxFPXHfg"
+      	Tabletop.init( { key: URL, callback: showInfo, simpleSheet: true } )
 
-      $(document).on("click", ".tag", function(event){
-        var tag = $(event.target).text()
-        var tagFilter = getTagMatches(gData, tag)
-        Sheetsee.makeTable(tagFilter.reverse(), "#articleTable")
-      })
+    }) 
+    
+    function showInfo(data) {
+      var gData = separateTags(data);
+      drawTags(gData);
+      Sheetsee.makeTable(gData.reverse(), "#portfolio2" );
+      Sheetsee.initiateTableFilter(gData, "#articleSearch", "#portfolio2")
+      
+	      //Sheetsee.initiateTableFilter(gData, "#articleSearch", "#portfolio2")
+	       $(document).on("click", ".isotope-filter", function(event){
+	        var tag = $(event.target).text()
+	        if (tag == "All") {
+	        	Sheetsee.makeTable(gData.reverse(), "#portfolio2" );
+	        } else {
+		        var tagFilter = getTagMatches(gData, tag)
+		        Sheetsee.makeTable(tagFilter.reverse(), "#portfolio2")
+		    }
+	        	var isotope_filter2_list = $('#isotope-filter-list2');
+	        	var isotope_filter2_items = isotope_filter2_list.find('.isotope-filter');
+				isotope_filter2_items.parent().removeClass('active');
+				$(event.target).parent().addClass('active');
+
+	        var main_menu_scroll_el = $("#menu");
+	    	main_menu_scroll_el.getNiceScroll().resize();
+
+	      }) 
+
     }
+
+    setTimeout(function(){
+	    var main_menu_scroll_el = $("#menu");
+	    main_menu_scroll_el.getNiceScroll().resize();
+	},1500);
+
   </script>
 
 </body>

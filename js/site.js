@@ -70,21 +70,3 @@ function drawTags(data) {
   })
   $('#tags').html(contents)
 }
-
-// render the page title with its
-// article count
-function pageTitle(data) {
-	var amount = data.length
-	var contents = ich.title({
-  	numArticles: amount
-	})
-$('#title').html(contents)
-}
-
-// takes off the time from the dates
-function cleanDates(data) {
-	data.forEach(function (item) {
-		item.date = item.date.split(" at")[0]
-	})
-return data
-}
