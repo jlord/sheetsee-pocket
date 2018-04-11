@@ -41,6 +41,22 @@ a:hover {
   text-decoration: none;
   color: #00ffcc;
 }
+a.collapcelink {
+  text-decoration: none;
+  color: #fff;
+}
+
+.collapcelink .collapseicon:after {
+    /* symbol for "opening" panels */
+    font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
+    content: "\e114";    /* adjust as needed, taken from bootstrap.css */
+    color: #00ffcc;         /* adjust as needed */
+}
+.collapcelink.collapsed .collapseicon:after {
+    /* symbol for "collapsed" panels */
+    content: "\e080";    /* adjust as needed, taken from bootstrap.css */
+}
+
 address {
   font-weight: 900;
 }
