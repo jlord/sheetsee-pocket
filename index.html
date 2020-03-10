@@ -75,6 +75,7 @@
         var tag = $(event.target).text()
         var tagFilter = getTagMatches(gData, tag)
         Sheetsee.makeTable(tagFilter.reverse(), "#articleTable")
+	Sheetsee.initiateTableFilter(gData, "#articleSearch", "#articleTable")
       })
     }
   </script>
