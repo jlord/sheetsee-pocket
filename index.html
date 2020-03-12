@@ -11,9 +11,66 @@
 		<link rel="shortcut icon" href="https://raw.github.com/jlord/sheetsee-pocket/master/favicon-p.png"/>
 		<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 		<link media="screen" rel="stylesheet" type="text/css" href="css/style.css"> 
+		<style>
+/* Center the loader */
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add animation to "page content" */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+
+#myDiv {
+  display: none;
+  text-align: center;
+}
+</style>
+
 	</head>
 <body>
-	<div id="wrapper">
+
+<div id="loader"></div>
+
+<div id="wrapper" style="display:none;">
 		<div id="title"></div>
 		<div id="filters" class="container">
 		<input id="articleSearch" type="text" placeholder="Search for.."></input>
@@ -21,12 +78,12 @@
       		<h3>Categories </h3><span id="tags"></span>   </div>
 
 		<div id="articleTable"></div>
-
+</div><!-- end wrapper -->
     <div id="info">
       <h2>Disclaimer:</h2>
       <p>Palar Club does not Solicit, Represent or Endorse the Marketability, Reliability , Quality or Price of any Products or Articles Advertised, Displayed, Purchased, or Obtained by you in connection with the services herein. All transactions are to be undertaken at your own risk and responsibilities. </p>
     </div>
-	</div><!-- end wrapper -->
+	
 
 	<script id="title" type="text/html">
 		<h1><span class="highlighted">{{numArticles}}</span> Articles from Pocket</h1>
@@ -55,6 +112,8 @@
     }) 
       
     function showInfo(data) {
+	 document.getElementById("loader").style.display = "none";
+	 document.getElementById("wrapper").style.display = "block";
 	     console.log(data);
       var gData = separateTags(data)
       drawTags(gData)
