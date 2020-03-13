@@ -11,60 +11,6 @@
 		<link rel="shortcut icon" href="https://raw.github.com/jlord/sheetsee-pocket/master/favicon-p.png"/>
 		<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 		<link media="screen" rel="stylesheet" type="text/css" href="css/style.css"> 
-		<style>
-/* Center the loader */
-#loader {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  z-index: 1;
-  width: 150px;
-  height: 150px;
-  margin: -75px 0 0 -75px;
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid #3498db;
-  width: 120px;
-  height: 120px;
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
-}
-
-@-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* Add animation to "page content" */
-.animate-bottom {
-  position: relative;
-  -webkit-animation-name: animatebottom;
-  -webkit-animation-duration: 1s;
-  animation-name: animatebottom;
-  animation-duration: 1s
-}
-
-@-webkit-keyframes animatebottom {
-  from { bottom:-100px; opacity:0 } 
-  to { bottom:0px; opacity:1 }
-}
-
-@keyframes animatebottom { 
-  from{ bottom:-100px; opacity:0 } 
-  to{ bottom:0; opacity:1 }
-}
-
-#myDiv {
-  display: none;
-  text-align: center;
-}
-</style>
-
 	</head>
 <body>
 	<h2> Welcome to Palar Club Buy-Sell-Share portal. </h2>
@@ -74,22 +20,51 @@
  	<a href="http://bit.ly/palarbuysell" class="sml-button"> Input Form</a>
 	<h2>Listings</h2>
 <div id="loader"></div>
-
+<div class="blog-card">
+    <div class="meta">
+      <div class="photo" style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-1.jpg)"></div>
+      <ul class="details">
+        <li class="author"><a href="#">John Doe</a></li>
+        <li class="date">Aug. 24, 2015</li>
+        <li class="tags">
+          <ul>
+            <li><a href="#">Learn</a></li>
+            <li><a href="#">Code</a></li>
+            <li><a href="#">HTML</a></li>
+            <li><a href="#">CSS</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="description">
+      <h1>Learning to Code</h1>
+      <h2>Opening a door to the future</h2>
+      <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto obcaecati enim dicta praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
+      <p class="read-more">
+        <a href="#">Read More</a>
+      </p>
+    </div>
+  </div>
 <div id="wrapper" style="display:none;">
 		<div id="title"></div>
-		<div id="filters" class="container">
-		<input id="articleSearch" type="text" placeholder="Search for.."></input>
+		
+		<h3>What are you looking to do today? [Click any button below to list items] </h3><span id="types"></span>   
+
+		<div id="filters" class="container" style="display:none;">
+			<input id="articleSearch" type="text" placeholder="Search for.."></input>
 		<span class="clear sml-button">Clear</span> 
       		<h3>Categories </h3><span id="tags"></span>   </div>
 
-		<div id="articleTable"></div>
+		<div id="articleTable" style="display:none;"></div>
 
-    <div id="info">
+    <div id="info" >
         </div>
 </div><!-- end wrapper -->	
 
 	<script id="title" type="text/html">
-		<h1><span class="highlighted">{{numArticles}}</span> Articles from Pocket</h1>
+		<h2><span class="highlighted"> Items Sold : {{numArticles}}</span></h2>
+		
+		
 	</script>
 
   <script id="tags" type="text/html">
@@ -98,18 +73,42 @@
     {{/rows}}
   </script>
 
+<script id="types" type="text/html">
+    {{#rows}}
+<span href="#" class="type lrg-button">{{type}} : {{count}}</span>
+    {{/rows}}
+  </script>
+
 	<script id="articleTable" type="text/html">
-		<table>
-			<tr><th class="fancy">&#8470;</th><th class="date">Date</th><th class="">Article</th><th>Tags</th></tr>
-		  {{#rows}}
-		  	<tr class="{{rowNumber}}"><td class="light-type">{{rowNumber}}</td><td class="date">{{date}}</td><td class="article"><a href="{{url}}" target="_blank">{{article}}</a></td>
-		  	<td class="tag">{{#tags}}<a href="#">{{tag}}</a> {{/tags}}</td></tr>
-		  {{/rows}}
-	  </table>
+	 {{#rows}}
+	  <div class="blog-card">
+    <div class="meta">
+      <div class="photo" style="background-image:url('{{link}}');">
+	  </div>
+
+    </div>
+    <div class="description">
+      <h2>{{title}}  </h2> <h3>Added @ {{timestamp}}</h3> 
+      <h2>category: {{category}}</h2>
+	 <h2>{{condition}}</h2>
+     <h2> {{price}}</h2>	 
+<p>	     
+{{description}}
+{{name}}
+{{staffno}}
+{{autono}}
+{{mobile}}
+{{email}}
+ </p>
+    </div>
+  </div>
+	 {{/rows}}
+	
 	</script>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+	
       var URL = "1O1ER8Mwra4DkPKUtdjzRBAsxz3Tt5aupm0xveleC1VQ"
       Tabletop.init( { key: URL, callback: showInfo, simpleSheet: true } )
     }) 
@@ -117,18 +116,31 @@
     function showInfo(data) {
 	 document.getElementById("loader").style.display = "none";
 	 document.getElementById("wrapper").style.display = "block";
-	     console.log(data);
-      var gData = separateTags(data)
-      drawTags(gData)
-      cleanDates(gData)
-      pageTitle(gData)
+	 var qData=parseData(data)
+	 //getType(gData,"Item wanted")
+	 //	     console.log(gData);
+     // cleanDates(gData)
+    //      pageTitle(gData)
+     var gData =[]
+	// console.log(gData);
       Sheetsee.makeTable(gData.reverse(), "#articleTable")
       Sheetsee.initiateTableFilter(gData, "#articleSearch", "#articleTable")
       $(document).on("click", ".tag", function(event){
         var tag = $(event.target).text()
         var tagFilter = getTagMatches(gData, tag)
         Sheetsee.makeTable(tagFilter.reverse(), "#articleTable")
-	Sheetsee.initiateTableFilter(tagFilter, "#articleSearch", "#articleTable")
+		Sheetsee.initiateTableFilter(tagFilter, "#articleSearch", "#articleTable")
+      })
+	   $(document).on("click", ".type", function(event){
+        var type = $(event.target).text()
+		var typetext=type.split(':')
+		console.log(typetext[0].trim())
+        gData = getType(data, typetext[0].trim())
+		drawTags(gData)
+		document.getElementById("filters").style.display = "block";
+		document.getElementById("articleTable").style.display = "block";
+		Sheetsee.makeTable(gData.reverse(), "#articleTable")
+		Sheetsee.initiateTableFilter(gData, "#articleSearch", "#articleTable")
       })
     }
 	  
