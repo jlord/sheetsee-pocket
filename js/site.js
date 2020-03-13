@@ -3,88 +3,96 @@
 function existingTagsList(data) {
 	var existingTags = []
 	data.forEach(function getTagArray(row) {
-		if (row.tags === "") return
-		row.tags.forEach(function parseTags(tag) {
-			var tagString = tag["tag"]
-      if (existingTags.length === 0) existingTags.push(tagString)
-      if (existingTags.indexOf(tagString) > -1) return
-      existingTags.push(tagString)
+		if (row.category === "") return
+		if (existingTags.length === 0) existingTags.push(row.category)
+        if (existingTags.indexOf(row.category) > -1) return
+        existingTags.push(row.category)
     })
-  })
   return existingTags
-}
-
-// originally the tags are a string, this separates
-// them into their own objects which can be made
-// individual links in the html
-function separateTags(data) {
-	data.forEach(function findMultiTags(article) {
-		if (article.tags === "") return
-		if (article.tags.indexOf(',') >= 0) {
-			var tagArray = parseTags(article.tags)
-			var tagObjArray = arrayIntoObjects(tagArray)
-			article.tags = tagObjArray
-		}
-		else {
-			article.tags = [{"tag": article.tags}]
-		}
-	})
-  return data
-}
-
-// goes through the string tag and separates
-// them based on the comma
-function parseTags(bulkTags) {
-	tagArray = bulkTags.split(', ')
-	return tagArray
-}
-
-// turns the array of strings into objects
-function arrayIntoObjects(array) {
-  var tags = []
-  for (var i = 0; i < array.length; ++i)
-    if (array[i] !== undefined) tags.push({ "tag" : array[i]})
-  return tags
 }
 
 // find articles that match a tag
 function getTagMatches(data, selectedTag) {
   var matches = []
   data.forEach(function (element) {
-    var elTags = element.tags
+    var elTags = element.category
     if (elTags === "") return
-    elTags.forEach(function (tag) {
-      if (tag["tag"] === selectedTag.trim()) matches.push(element)
-
+    if (elTags === selectedTag.trim()) matches.push(element)
     })
-  })
   return matches
 }
 
-// render the section of the page that 
-// lists the tags
-function drawTags(data) {
-  var tag = existingTagsList(data)
-  var contents = ich.tags({
-    rows: tag
-  })
-  $('#tags').html(contents)
+function existingTypeList(data) {
+	var existingType = []
+	data.forEach(function getTypeList(row) {
+		if (row.option === "") return
+		if(row.option.trim()==="Remove listing") return
+		if (existingType.length === 0) existingType.push(row.option)
+      if (existingType.indexOf(row.option) > -1) return
+      existingType.push(row.option)
+    })
+   return existingType
 }
 
+function getType(data, selectedTag) {
+  var matches1 = []
+  data.forEach(function (element) {
+    var elTags = element.option
+    if (elTags === "") return
+  if (elTags === selectedTag.trim()) matches1.push(element)
+  })
+  return matches1
+}
+function getSoldCount(data) {
+	var count = 0;
+	data.forEach(function (element) {
+    var elTags = element.option
+    if (elTags === "") return
+	if (elTags === "Remove listing") 
+	{
+		if(element.yremove==="Item sold") 
+		count++;  
+	}
+  })
+  return count
+}
+
+function parseData(data){
+	var pData=[];
+	var type = existingTypeList(data) 
+    var typebutton =[]; 
+    type.forEach(function(ele,index){
+	pData.push(getType(data,ele))
+	var temp={type:ele, count: pData[index].length}
+	typebutton.push(temp)
+		})
+	var contents = ich.types({
+    rows: typebutton
+  })
+
+  $('#types').html(contents)
+	var amount = getSoldCount(data)
+	var contents = ich.title({
+	numArticles: amount
+	})
+	$('#title').html(contents)
+	return pData	
+}
+function drawTags(data)
+{
+	var tag = existingTagsList(data) 
+	var contents1 = ich.tags({
+    rows: tag
+  })
+	$('#tags').html(contents1)
+
+}
 // render the page title with its
 // article count
 function pageTitle(data) {
-	var amount = data.length
+	var amount = [data.length,data.length,data.length]
 	var contents = ich.title({
   	numArticles: amount
 	})
 $('#title').html(contents)
-}
-
-// takes off the time from the dates
-function cleanDates(data) {
-	data.forEach(function (item) {
-		item.date = item.date.split(" at")[0]
-	})
-return data
 }
