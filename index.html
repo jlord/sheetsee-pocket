@@ -1,124 +1,107 @@
 <html>
 	<head>
-		<title>Palar Club- Buy-Sell-Share</title>
+		<title>Palar Pitch - Buy, Rent, Sell, Share</title>
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script type="text/javascript" src="js/ICanHaz.js"></script> 
+		<script type="text/javascript" src="js/ICanHaz.js"></script>
 		<script type="text/javascript" src='js/jquery.js '></script>
     <script type="text/javascript" src='js/tabletop.js'></script>
     <script type="text/javascript" src='js/site.js'></script>
 		<script type="text/javascript" src='js/sheetsee.js'></script>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-		<link rel="shortcut icon" href="https://raw.github.com/jlord/sheetsee-pocket/master/favicon-p.png"/>
-		<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-		<link media="screen" rel="stylesheet" type="text/css" href="css/style.css"> 
+  	<link media="screen" rel="stylesheet" type="text/css" href="css/w3.css">
+
 	</head>
 <body>
 	 <header class="w3-container w3-center w3-padding-24 w3-white">
     <h1 class="w3-xxxlarge"><b>PALAR PITCH</b></h1>
-	 <h4 class="w3-text-red"><b>Welcome to the Palar Club Buy-Sell-Share portal.</b></h4>
+	 <h4 class="w3-text-red"><b>Welcome to the Palar Club Buy-Rent-Sell-Share portal.</b></h4>
 	<h6><span class="w3-tag">Disclaimer: Palar Club does not solicit, represent or endorse the marketability, reliability , quality or price of any products or articles advertised, displayed, purchased, or obtained by you in connection with the services herein. All transactions are to be undertaken at your own risk and responsibilities.</span> </h6>
   </header>
-  
-<div class="w3-container" style="width:80%;margin: auto;">
-	<ul class="w3-ul  w3-border ">
-	<li><h5>3 Simple Steps</h5></li>
-  <li>1. Advertise among the club members, the items you want to sell/ rent/ share for free / wish to buy with contact information. </li>
-  <li>2. Get contacted by interested members directly.</li>
-  <li>3. Complete the transaction offline and remove the item listing using the input form response link sent to your mail.</li>
-</ul>
-	</div>
-	<br>
- 	
-<div id="loader"></div>
-<div id="wrapper" style="display:none;">
-		<div id="title"></div>
-		
-		<h5>What are you looking to do today? [Click any button below to list items] </h5>
-		<a href="http://bit.ly/palarbuysell" class="w3-button w3-block w3-red" style="width:100%;margin:auto;"> Advertise/ Sell [Fill google form - login required]</a>
-		<br>
-		<span id="types"></span>   
 
-		<div id="filters" class="container" style="display:none;">
+<div id="steps" class="w3-container w3-display-container" style="width:80%;margin: auto;">
+	<span onclick="this.parentElement.style.display='none'"
+  class="w3-button w3-large w3-display-topright w3-margin-right ">&times;</span>
+	<ul class="w3-ul  w3-border ">
+	<li style="margin:auto" class= "w3-text-red"> <b>3 Simple Steps</b></li>
+  <li> <span class="w3-text-red">1.</span> Advertise among the club members, the items you want to sell/ rent/ share for free / wish to buy with contact information. </li>
+  <li><span class="w3-text-red">2.</span> Get contacted by interested members directly.</li>
+  <li><span class="w3-text-red">3.</span> Complete the transaction offline and remove the item listing using the input form response link sent to your mail.</li>
+</ul>
+<br>
+	</div>
+	<div id="loader" class="loader" style="margin:auto"><div id="title"></div>
+	</div>
+
+<div id="wrapper" class="w3-container w3-center" style="width:80%;margin: auto; display:none;">
+
+<div class="w3-container">
+		<h5>What are you looking to do today? [Click any <span class="w3-text-red">button</span> below to list items] </h5>
+	</div>
+		<a href="http://bit.ly/palarbuysell" class="w3-button w3-block w3-red" style="width:75%;margin:auto;"> Advertise/ Sell [Fill google form - login required]</a>
+		<br>
+		<span id="types"></span>
+
+		<div id="filters" class="w3-container" style="display:none;">
 			<input id="articleSearch" type="text" placeholder="Search for.."></input>
-		<span class="clear sml-button">Clear</span> 
-      		<h3>Categories </h3><span id="tags"></span>   </div>
+		<span class="w3-button w3-red">Clear</span>
+      		<h5>Categories [Click <span class="w3-text-blue">button</span> below to filter]</h5><span id="tags"></span>   </div>
 <div class="w3-container">
 		<div id="articleTable" style="display:none;"></div>
 </div>
-    <div id="info" >
-        </div>
-</div><!-- end wrapper -->	
+
+</div><!-- end wrapper -->
 
 	<script id="title" type="text/html">
-		<h5><span class="highlighted"> Items Sold : {{numArticles}}</span></h5>
-		
-		
+		Items Sold : {{numArticles}}
 	</script>
-
+	<script id="types" type="text/html">
+	    {{#rows}}
+	<button class="w3-button w3-block w3-red type" style="width:75%;margin:auto">{{type}} : {{count}}</button>
+	<br>
+	    {{/rows}}
+	  </script>
   <script id="tags" type="text/html">
     {{#rows}}
-      <span href="#" class="tag sml-button">{{.}}</span>
-    {{/rows}}
-  </script>
-
-<script id="types" type="text/html">
-    {{#rows}}
-<button class="w3-button w3-block w3-red type">{{type}} : {{count}}</button>
-<br>
-
+      <span href="#" class="tag w3-button w3-blue w3-margin-bottom w3-margin-right">{{.}}</span>
     {{/rows}}
   </script>
 
 	<script id="articleTable" type="text/html">
 	 {{#rows}}
-	 
-	 
-	  <div class="w3-card-4" style="width:70%" >
+	  <div class="w3-card-4">
     <header class="w3-container w3-blue-gray">
 	<h3 style="float:left">{{title}} </h3> <h5 style="float:right">Added on {{timestamp}} </h5>
-	
 	  <p style="clear:both">Category: {{category}}</p>
     </header>
-	
 	<div class="w3-row w3-white w3-margin">
-
 <div class="w3-third">
 	 <a href="{{link}}">
   <img src="{{link}}" style="width:100%;min-height:200px"></a>
 </div>
 <div class="w3-twothird w3-container">
-  
  <p>{{description}}   </p>
 	<p>Condition: {{condition}} </p><p>Expected price: {{price}}</p>
 </div>
-
 </div>
-
- 
     <footer class="w3-container w3-light-gray">
 	<h5 style="margin:0" >Contact details</h5>
 	<div style="float:left;margin:0">
 	<h4>Name: {{name}} <br> Auto: {{autono}}</h4>
-	
 	</div>
 	<div style="float:right;margin:0;overflow :auto; word-break: break-all"> <h4> email: {{email}} <br> mobile: {{mobile}}</h4>
-	</div> 	
+	</div>
 		</footer>
   </div>
 	 <br>
-	 
 	 {{/rows}}
-	
 	</script>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-	
       var URL = "1S6fHwcPpgvoLXjTH1-aEoG7t9wYvn2UZZEdguLvQH-Q"
       Tabletop.init( { key: URL, callback: showInfo, simpleSheet: true } )
-    }) 
-      
+    })
+
     function showInfo(data) {
 	 document.getElementById("loader").style.display = "none";
 	 document.getElementById("wrapper").style.display = "block";
@@ -138,6 +121,7 @@
 		Sheetsee.initiateTableFilter(tagFilter, "#articleSearch", "#articleTable")
       })
 	   $(document).on("click", ".type", function(event){
+			  document.getElementById("steps").style.display = "none";
         var type = $(event.target).text()
 		var typetext=type.split(':')
 		console.log(typetext[0].trim())
@@ -149,7 +133,7 @@
 		Sheetsee.initiateTableFilter(gData, "#articleSearch", "#articleTable")
       })
     }
-	  
+
   </script>
 
 </body>
