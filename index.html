@@ -2,42 +2,57 @@
 	<head>
 		<title>Palar Club- Buy-Sell-Share</title>
     <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script type="text/javascript" src="js/ICanHaz.js"></script> 
 		<script type="text/javascript" src='js/jquery.js '></script>
     <script type="text/javascript" src='js/tabletop.js'></script>
     <script type="text/javascript" src='js/site.js'></script>
 		<script type="text/javascript" src='js/sheetsee.js'></script>
-    
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<link rel="shortcut icon" href="https://raw.github.com/jlord/sheetsee-pocket/master/favicon-p.png"/>
 		<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 		<link media="screen" rel="stylesheet" type="text/css" href="css/style.css"> 
 	</head>
 <body>
-	<h2> Welcome to Palar Club Buy-Sell-Share portal. </h2>
-	<p> 1. Advertise among the club members, the items you want to sell/ rent/ share for free / wish to buy with contact information. 2. Get replies from interested members directly. 3. Complete the transaction offline and remove the item listing using the input form response link.</p>
-	<h2>Disclaimer:</h2>
-        <p>Palar Club does not Solicit, Represent or Endorse the Marketability, Reliability , Quality or Price of any Products or Articles Advertised, Displayed, Purchased, or Obtained by you in connection with the services herein. All transactions are to be undertaken at your own risk and responsibilities. </p>
- 	<a href="http://bit.ly/palarbuysell" class="sml-button"> Input Form</a>
-	<h2>Listings</h2>
+	 <header class="w3-container w3-center w3-padding-24 w3-white">
+    <h1 class="w3-xxxlarge"><b>PALAR PITCH</b></h1>
+    <h6> <span class="w3-tag">Welcome to the Palar Club Buy-Sell-Share portal.</span></h6>
+	<h6><span class="w3-tag">Disclaimer: </span>Palar Club does not Solicit, Represent or Endorse the Marketability, Reliability , Quality or Price of any Products or Articles Advertised, Displayed, Purchased, or Obtained by you in connection with the services herein. All transactions are to be undertaken at your own risk and responsibilities. </h6>
+  </header>
+	 <div class="w3-container" style="width:80%;margin: auto;">
+	<ul class="w3-ul  w3-border ">
+	<li><h5>3 Simple Steps</h5></li>
+  <li>1. Advertise among the club members, the items you want to sell/ rent/ share for free / wish to buy with contact information. </li>
+  <li>2. Get contacted by interested members directly.</li>
+  <li>3. Complete the transaction offline and remove the item listing using the input form response link.</li>
+</ul>
+	</div>
+	<br>
+ 	
+	<br>
+	
 <div id="loader"></div>
 <div id="wrapper" style="display:none;">
 		<div id="title"></div>
 		
-		<h3>What are you looking to do today? [Click any button below to list items] </h3><span id="types"></span>   
+		<h5>What are you looking to do today? [Click any button below to list items] </h5>
+		<a href="http://bit.ly/palarbuysell" class="w3-button w3-block w3-red" style="width:100%;margin:auto;"> Advertise/ Sell [Fill google form]</a>
+		<br>
+		<span id="types"></span>   
 
 		<div id="filters" class="container" style="display:none;">
 			<input id="articleSearch" type="text" placeholder="Search for.."></input>
 		<span class="clear sml-button">Clear</span> 
       		<h3>Categories </h3><span id="tags"></span>   </div>
-
+<div class="w3-container">
 		<div id="articleTable" style="display:none;"></div>
-
+</div>
     <div id="info" >
         </div>
 </div><!-- end wrapper -->	
 
 	<script id="title" type="text/html">
-		<h2><span class="highlighted"> Items Sold : {{numArticles}}</span></h2>
+		<h5><span class="highlighted"> Items Sold : {{numArticles}}</span></h5>
 		
 		
 	</script>
@@ -50,33 +65,49 @@
 
 <script id="types" type="text/html">
     {{#rows}}
-<span href="#" class="type lrg-button">{{type}} : {{count}}</span>
+<button class="w3-button w3-block w3-red type">{{type}} : {{count}}</button>
+<br>
+
     {{/rows}}
   </script>
 
 	<script id="articleTable" type="text/html">
 	 {{#rows}}
-	  <div class="blog-card">
-    <div class="meta">
-      <div class="photo" style="background-image:url('{{link}}');">
-	  </div>
+	 
+	 
+	  <div class="w3-card-4" style="width:70%" >
+    <header class="w3-container w3-blue-gray">
+	<h3 style="float:left">{{title}} </h3> <h5 style="float:right">Added on {{timestamp}} </h5>
+	
+	  <p style="clear:both">Category: {{category}}</p>
+    </header>
+	
+	<div class="w3-row w3-white w3-margin">
 
-    </div>
-    <div class="description">
-      <h2>{{title}}  </h2> <h3>Added @ {{timestamp}}</h3> 
-      <h2>category: {{category}}</h2>
-	 <h2>{{condition}}</h2>
-     <h2> {{price}}</h2>	 
-<p>	     
-{{description}}
-{{name}}
-{{staffno}}
-{{autono}}
-{{mobile}}
-{{email}}
- </p>
-    </div>
+<div class="w3-third">
+  <img src="{{link}}" style="width:100%;min-height:200px">
+</div>
+<div class="w3-twothird w3-container">
+  
+ <p>{{description}}   </p>
+	<p>Condition: {{condition}} </p><p>Expected price: {{price}}</p>
+</div>
+
+</div>
+
+ 
+    <footer class="w3-container w3-light-gray">
+	<h5 style="margin:0" >Contact details</h5>
+	<div style="float:left;margin:0">
+	<h4>Name: {{name}} <br> Auto: {{autono}}</h4>
+	
+	</div>
+	<div style="float:right;margin:0"> <h4> email: {{email}} <br> mobile: {{mobile}}</h4>
+	</div> 	
+		</footer>
   </div>
+	 <br>
+	 
 	 {{/rows}}
 	
 	</script>
