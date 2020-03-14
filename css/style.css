@@ -1,0 +1,73 @@
+body {font-family: Montserrat; font-size: 14px; padding: 10px 0px 40px 0px; color: #333;}
+
+
+h1 {font-size: 48px; margin-bottom: 20px;}
+.highlighted {color: #2196f3; opacity: 1; transition: opacity .25s ease-in-out;}
+.highlighted:hover {opacity: 0.5;}
+
+
+p a {color: #06DDA0;}
+
+.light-type {color: #777;} /* #06DDA0 */
+.dim {color: #acacac;}
+.fancy {font-family: baskerville, garamond, serif; font-weight: lighter; font-style: italic;}
+
+#wrapper {margin: 0px auto; max-width: 80%; }
+
+ul.nav {list-style: none; margin: 0px; padding: 0px; color: #06DDA0;}
+ul.nav li {display: inline; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; padding-right: 4px;}
+ul.nav a {color: #06DDA0; border-bottom: 1px dotted #06DDA0;}
+ul.nav a.dim {color: #acacac; border-bottom: 1px dotted #acacac;}
+ul.nav a:hover {font-weight: 900;}
+
+#filters {padding: 30px 0px; overflow: auto;}
+#tags {line-height: 25px;}
+#types {line-height: 25px;}
+table {border-spacing: 0px; min-width: 80%; margin: 0 auto;}
+th {padding: 10px}
+td, text {padding: 5px 10px; font-size: 12px; font-weight: lighter; line-height: 18px;}
+td.article a:visited {color: #777;}
+td.date {min-width: 119px;}
+tr {text-align: left; vertical-align: top; padding: 4px 0px;}
+tr:nth-child(2n+2) {background: #eee;}
+.tHeader {cursor: pointer;}
+.tHeader::after {content: " \2193 \2191 "; font-size: 10px; padding-left: 3px;}
+
+input {margin: 12px 0px; border: none; border-bottom: 1px solid #333; background-color: transparent; padding: 0px; color: #acacac; font-size: 13px; height: 22px; font-family: Montserrat;}
+
+.sml-button {border-radius: 1px; cursor: pointer; margin:10px 10px; padding: 10px 10px; background-color: #06DDA0; font-size: 11px; text-transform: uppercase; letter-spacing: .1em; text-align: center; color: #fff; font-family: Montserrat;}
+.sml-button:hover {background: #eee;}
+.button-pressed {background: #0CCC96;}
+
+.lrg-button {border-radius: 1px; cursor: pointer; margin: 10px 10px; padding: 10px 10px; background-color: #ff0000; font-size: 20px; text-transform: uppercase; letter-spacing: .1em; text-align: center; color: #fff; font-family: Montserrat;}
+.lrg-button:hover {background: #eee;}
+
+#info {padding: 30px 0px;}
+
+/* Center the loader */
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
