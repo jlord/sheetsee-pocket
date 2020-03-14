@@ -16,27 +16,26 @@
 <body>
 	 <header class="w3-container w3-center w3-padding-24 w3-white">
     <h1 class="w3-xxxlarge"><b>PALAR PITCH</b></h1>
-    <h6> <span class="w3-tag">Welcome to the Palar Club Buy-Sell-Share portal.</span></h6>
-	<h6><span class="w3-tag">Disclaimer: </span>Palar Club does not Solicit, Represent or Endorse the Marketability, Reliability , Quality or Price of any Products or Articles Advertised, Displayed, Purchased, or Obtained by you in connection with the services herein. All transactions are to be undertaken at your own risk and responsibilities. </h6>
+	 <h4 class="w3-text-red"><b>Welcome to the Palar Club Buy-Sell-Share portal.</b></h4>
+	<h6><span class="w3-tag">Disclaimer: Palar Club does not solicit, represent or endorse the marketability, reliability , quality or price of any products or articles advertised, displayed, purchased, or obtained by you in connection with the services herein. All transactions are to be undertaken at your own risk and responsibilities.</span> </h6>
   </header>
-	 <div class="w3-container" style="width:80%;margin: auto;">
+  
+<div class="w3-container" style="width:80%;margin: auto;">
 	<ul class="w3-ul  w3-border ">
 	<li><h5>3 Simple Steps</h5></li>
   <li>1. Advertise among the club members, the items you want to sell/ rent/ share for free / wish to buy with contact information. </li>
   <li>2. Get contacted by interested members directly.</li>
-  <li>3. Complete the transaction offline and remove the item listing using the input form response link.</li>
+  <li>3. Complete the transaction offline and remove the item listing using the input form response link sent to your mail.</li>
 </ul>
 	</div>
 	<br>
  	
-	<br>
-	
 <div id="loader"></div>
 <div id="wrapper" style="display:none;">
 		<div id="title"></div>
 		
 		<h5>What are you looking to do today? [Click any button below to list items] </h5>
-		<a href="http://bit.ly/palarbuysell" class="w3-button w3-block w3-red" style="width:100%;margin:auto;"> Advertise/ Sell [Fill google form]</a>
+		<a href="http://bit.ly/palarbuysell" class="w3-button w3-block w3-red" style="width:100%;margin:auto;"> Advertise/ Sell [Fill google form - login required]</a>
 		<br>
 		<span id="types"></span>   
 
@@ -85,7 +84,8 @@
 	<div class="w3-row w3-white w3-margin">
 
 <div class="w3-third">
-  <img src="{{link}}" style="width:100%;min-height:200px">
+	 <a href="{{link}}">
+  <img src="{{link}}" style="width:100%;min-height:200px"></a>
 </div>
 <div class="w3-twothird w3-container">
   
@@ -97,12 +97,12 @@
 
  
     <footer class="w3-container w3-light-gray">
-	<h5 style="margin:0;overflow :auto; word-break: break-all" >Contact details</h5>
+	<h5 style="margin:0" >Contact details</h5>
 	<div style="float:left;margin:0">
 	<h4>Name: {{name}} <br> Auto: {{autono}}</h4>
 	
 	</div>
-	<div style="float:right;margin:0 overflow :auto; word-break: break-all"> <h4 > email: {{email}} <br> mobile: {{mobile}}</h4>
+	<div style="float:right;margin:0;overflow :auto; word-break: break-all"> <h4> email: {{email}} <br> mobile: {{mobile}}</h4>
 	</div> 	
 		</footer>
   </div>
@@ -115,7 +115,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
 	
-      var URL = "1O1ER8Mwra4DkPKUtdjzRBAsxz3Tt5aupm0xveleC1VQ"
+      var URL = "1S6fHwcPpgvoLXjTH1-aEoG7t9wYvn2UZZEdguLvQH-Q"
       Tabletop.init( { key: URL, callback: showInfo, simpleSheet: true } )
     }) 
       
