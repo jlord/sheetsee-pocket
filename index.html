@@ -3,6 +3,7 @@
 		<title>Palar Pitch - Buy, Rent, Sell, Share</title>
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 		<script type="text/javascript" src="js/ICanHaz.js"></script>
 		<script type="text/javascript" src='js/jquery.js '></script>
     <script type="text/javascript" src='js/tabletop.js'></script>
@@ -12,13 +13,14 @@
 
 	</head>
 <body>
-	 <header class="w3-container w3-center w3-padding-24 w3-white">
+	<div class="container" style="max-width:1100px; min-width:480px;margin:auto">
+	 <header class="w3-container w3-center w3-padding-24 w3-white" >
     <h1 class="w3-xxxlarge"><b>PALAR PITCH</b></h1>
 	 <h4 class="w3-text-red"><b>Welcome to the Palar Club Buy-Rent-Sell-Share portal.</b></h4>
 	<h6><span class="w3-tag">Disclaimer: Palar Club does not solicit, represent or endorse the marketability, reliability , quality or price of any products or articles advertised, displayed, purchased, or obtained by you in connection with the services herein. All transactions are to be undertaken at your own risk and responsibilities.</span> </h6>
   </header>
 
-<div id="steps" class="w3-container w3-display-container" style="width:80%;margin: auto;">
+<div id="steps" class="w3-container w3-display-container">
 	<span onclick="this.parentElement.style.display='none'"
   class="w3-button w3-large w3-display-topright w3-margin-right ">&times;</span>
 	<ul class="w3-ul  w3-border ">
@@ -32,7 +34,7 @@
 	<div id="loader" class="loader" style="margin:auto"><div id="title"></div>
 	</div>
 
-<div id="wrapper" class="w3-container w3-center" style="width:80%;margin: auto; display:none;">
+<div id="wrapper" class="w3-container w3-center" style="display:none;">
 
 <div class="w3-container">
 		<h5>What are you looking to do today? [Click any <span class="w3-text-red">button</span> below to list items] </h5>
@@ -43,58 +45,108 @@
 
 		<div id="filters" class="w3-container" style="display:none;">
 			<input id="articleSearch" type="text" placeholder="Search for.."></input>
-		<span class="w3-button w3-red">Clear</span>
+		<span class="w3-button w3-red clear">Clear</span>
       		<h5>Categories [Click <span class="w3-text-blue">button</span> below to filter]</h5><span id="tags"></span>   </div>
 <div class="w3-container">
 		<div id="articleTable" style="display:none;"></div>
 </div>
 
 </div><!-- end wrapper -->
+</div><!-- end cntainer-->
+
+<div id="modal01" class="w3-modal" onclick="this.style.display='none'">
+  <span class="w3-closebtn w3-hover-red w3-text-white w3-xxlarge w3-container w3-display-topright">&times;</span>
+  <div class="w3-modal-content w3-animate-zoom">
+    <img id="img01" style="width:100%">
+  </div>
+</div>
 
 	<script id="title" type="text/html">
 		Items Sold : {{numArticles}}
 	</script>
+
+
 	<script id="types" type="text/html">
 	    {{#rows}}
 	<button class="w3-button w3-block w3-red type" style="width:75%;margin:auto">{{type}} : {{count}}</button>
 	<br>
 	    {{/rows}}
 	  </script>
+
+
   <script id="tags" type="text/html">
     {{#rows}}
       <span href="#" class="tag w3-button w3-blue w3-margin-bottom w3-margin-right">{{.}}</span>
     {{/rows}}
   </script>
 
+
 	<script id="articleTable" type="text/html">
 	 {{#rows}}
-	  <div class="w3-card-4">
-    <header class="w3-container w3-blue-gray">
-	<h3 style="float:left">{{title}} </h3> <h5 style="float:right">Added on {{timestamp}} </h5>
-	  <p style="clear:both">Category: {{category}}</p>
+	  <div class="w3-card-4 w3-left-align w3-margin-bottom">
+    <header class="w3-container w3-black">
+	<h3 style="float:left"><b>{{title}} </b></h3> <h5 style="float:right">Added on {{timestamp}} </h5>
     </header>
-	<div class="w3-row w3-white w3-margin">
-<div class="w3-third">
-	 <a href="{{link}}">
-  <img src="{{link}}" style="width:100%;min-height:200px"></a>
-</div>
-<div class="w3-twothird w3-container">
- <p>{{description}}   </p>
-	<p>Condition: {{condition}} </p><p>Expected price: {{price}}</p>
-</div>
-</div>
-    <footer class="w3-container w3-light-gray">
-	<h5 style="margin:0" >Contact details</h5>
-	<div style="float:left;margin:0">
-	<h4>Name: {{name}} <br> Auto: {{autono}}</h4>
+
+<div class="w3-row w3-white w3-display-container">
+	<span href="#" class="tag w3-button w3-blue w3-margin-bottom w3-display-topmiddle" >{{category}}</span>
+
+
+	<div class="w3-row">
+			{{#image}}
+  <div class="w3-col w3-right w3-container" style="width:25%;padding:0; ">
+			<img src="{{link}}" style="width:100%;min-height:200px;cursor:pointer" onclick="onClick(this)" class="w3-hover-opacity"/>
+			</div>
+		{{/image}}
+
+	<div class="w3-rest w3-container" style="padding:0px 16px;margin:w3-left;overflow :auto; word-break: break-all">
+		<p> <span class="w3-text-red"> Description:</span></p>
+	 	<p>{{description}}   </p>
+	 	<p> <span class="w3-text-red"> Condition: </span> {{condition}} </p>
+	 {{#location}}
+	 	<p> <span class="w3-text-red"> Location: </span>
+	 		<a href="https://www.google.com/maps/search/?api=1&query={{location}}" target="_blank"> {{location}}</a></p>
+	 {{/location}}
+	 {{#price}}
+	 	<p> <span class="w3-text-red"> Expected price: </span> {{price}}</p>
+	 	{{/price}}
+
 	</div>
-	<div style="float:right;margin:0;overflow :auto; word-break: break-all"> <h4> email: {{email}} <br> mobile: {{mobile}}</h4>
+</div>
+
 	</div>
-		</footer>
-  </div>
-	 <br>
+
+	<footer class="w3-container w3-light-gray w3-cell-row   w3-center"  style="padding:0px 8px;margin:w3-left;overflow :auto; word-break: break-all">
+
+ <div class="w3-container w3-cell" style="padding:0px 8px; min-width:30%">
+ <p > <span class="w3-text-red"> Name 	</span></p>
+	 <p>	{{name}} </p>
+	 </div>
+  <div class="w3-container w3-cell" style="padding:0px 8px; min-width:30%">
+ <p> <span class="w3-text-red"> email </span></p>
+ <p> <a href="mailto:{{email}}?subject=Palar Pitch-{{title}}
+ &body=Hi, I'm interested in your listing {{title}}!">{{email}}</a></p>
+</div>
+ <div class="w3-container w3-cell" style="padding:0px 8px; min-width:15%">
+<p> <span class="w3-text-red"> Auto 	</span>	</p>
+<p>{{autono}}</p>
+</div>
+ <div class="w3-container w3-cell" style="padding:0px 8px; min-width:25%">
+ <p> <span class="w3-text-red"> mobile:</span> </p>
+ <p><a href="tel:{{mobile}}">	{{mobile}}</a></p>
+</div>
+ </footer>
+</div>
 	 {{/rows}}
 	</script>
+
+	<script>
+	function onClick(element) {
+	  document.getElementById("img01").src = element.src;
+	  document.getElementById("modal01").style.display = "block";
+	}
+	</script>
+
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -106,13 +158,8 @@
 	 document.getElementById("loader").style.display = "none";
 	 document.getElementById("wrapper").style.display = "block";
 	 var qData=parseData(data)
-	 //getType(gData,"Item wanted")
-	 //	     console.log(gData);
-     // cleanDates(gData)
-    //      pageTitle(gData)
-     var gData =[]
-	// console.log(gData);
-      Sheetsee.makeTable(gData.reverse(), "#articleTable")
+   var gData =[]
+	      Sheetsee.makeTable(gData.reverse(), "#articleTable")
       Sheetsee.initiateTableFilter(gData, "#articleSearch", "#articleTable")
       $(document).on("click", ".tag", function(event){
         var tag = $(event.target).text()
@@ -124,8 +171,7 @@
 			  document.getElementById("steps").style.display = "none";
         var type = $(event.target).text()
 		var typetext=type.split(':')
-		console.log(typetext[0].trim())
-        gData = getType(data, typetext[0].trim())
+	  gData = getType(data, typetext[0].trim())
 		drawTags(gData)
 		document.getElementById("filters").style.display = "block";
 		document.getElementById("articleTable").style.display = "block";
