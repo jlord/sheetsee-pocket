@@ -31,7 +31,7 @@
 <body>
 	<div class="container" style="max-width:1100px; min-width:360px;margin:auto">
 	 <header class="w3-container w3-center w3-padding-24 w3-white" >
-    <h1 class="w3-xxxlarge"><b>PALAR PITCH</b></h1>
+    <h1 class="w3-xxxlarge"><b>PALAR PITCH</b> </h1>
 	 <h4 class="w3-text-red"><b>Welcome to the Palar Club Buy-Rent-Sell-Share portal.</b></h4>
 	<h6><span class="w3-tag">Disclaimer: Palar Club does not solicit, represent or endorse the marketability, reliability , quality or price of any products or articles advertised, displayed, purchased, or obtained by you in connection with the services herein. All transactions are to be undertaken at your own risk and responsibilities.</span> </h6>
   </header>
@@ -109,7 +109,7 @@
 <div class="w3-cell-row">
 
 
-		<div class="w3-cell w3-container w3-mobile" style="padding:0px 16px;margin:w3-left;overflow :auto; word-break: break-all">
+		<div class="w3-cell w3-container w3-mobile" style="padding:0px 16px;margin:w3-left;overflow :auto; word-break: break-all; 	{{#image}}width:75%	{{/image}}">
 <br>
 		<p> <span class="w3-text-red"> Description:</span></p>
 	 	<p>{{description}}   </p>
@@ -124,7 +124,8 @@
 
 	</div>
 	{{#image}}
-<div class="w3-cell w3-container w3-cell-middle w3-mobile" style="padding-right: 16px;">
+<div class="w3-cell w3-container w3-cell-middle w3-mobile" style="padding-right: 16px; width:25%">
+	<p style="text-align:center">Click to zoom</p>
 	<img src="{{link}}" style="width:100%;cursor:pointer;" onclick="onClick(this)" class="w3-hover-opacity"/>
 	</div>
 {{/image}}
