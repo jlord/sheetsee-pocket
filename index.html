@@ -25,11 +25,11 @@
 		<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 		<link rel="manifest" href="manifest.json">
 		<meta name="msapplication-TileColor" content="#ffffff">
-		<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+		<meta name="msapplication-TileImage" content="ms-icon-144x144.png">
 		<meta name="theme-color" content="#ffffff">
 	</head>
 <body>
-	<div class="container" style="max-width:1100px; min-width:480px;margin:auto">
+	<div class="container" style="max-width:1100px; min-width:360px;margin:auto">
 	 <header class="w3-container w3-center w3-padding-24 w3-white" >
     <h1 class="w3-xxxlarge"><b>PALAR PITCH</b></h1>
 	 <h4 class="w3-text-red"><b>Welcome to the Palar Club Buy-Rent-Sell-Share portal.</b></h4>
@@ -55,7 +55,7 @@
 <div class="w3-container">
 		<h5>What are you looking to do today? [Click any <span class="w3-text-red">button</span> below to list items] </h5>
 	</div>
-		<a href="http://bit.ly/palarbuysell" class="w3-button w3-block w3-red" style="width:75%;margin:auto;"> Advertise/ Sell [Fill google form - login required]</a>
+		<a href="http://bit.ly/palarbuysell" class="w3-button w3-block w3-red" style="width:75%;margin:auto; white-space: normal; word-wrap: break-word;"> Advertise/ Sell [Google form - login required]</a>
 		<br>
 		<span id="types"></span>
 
@@ -104,18 +104,13 @@
 	<h3 style="float:left"><b>{{title}} </b></h3> <h5 style="float:right">Added on {{timestamp}} </h5>
     </header>
 
-<div class="w3-row w3-white w3-display-container">
+<div class="w3-white w3-display-container">
 	<span href="#" class="tag w3-button w3-blue w3-margin-bottom w3-display-topmiddle" >{{category}}</span>
+<div class="w3-cell-row">
 
 
-	<div class="w3-row">
-			{{#image}}
-  <div class="w3-col w3-right w3-container" style="width:25%;padding:0; ">
-			<img src="{{link}}" style="width:100%;min-height:200px;cursor:pointer" onclick="onClick(this)" class="w3-hover-opacity"/>
-			</div>
-		{{/image}}
-
-	<div class="w3-rest w3-container" style="padding:0px 16px;margin:w3-left;overflow :auto; word-break: break-all">
+		<div class="w3-cell w3-container w3-mobile" style="padding:0px 16px;margin:w3-left;overflow :auto; word-break: break-all">
+<br>
 		<p> <span class="w3-text-red"> Description:</span></p>
 	 	<p>{{description}}   </p>
 	 	<p> <span class="w3-text-red"> Condition: </span> {{condition}} </p>
@@ -128,28 +123,33 @@
 	 	{{/price}}
 
 	</div>
+	{{#image}}
+<div class="w3-cell w3-container w3-cell-middle w3-mobile" style="padding-right: 16px;">
+	<img src="{{link}}" style="width:100%;cursor:pointer;" onclick="onClick(this)" class="w3-hover-opacity"/>
+	</div>
+{{/image}}
+
 </div>
 
 	</div>
 
-	<footer class="w3-container w3-light-gray w3-cell-row   w3-center"  style="padding:0px 8px;margin:w3-left;overflow :auto; word-break: break-all">
-
- <div class="w3-container w3-cell" style="padding:0px 8px; min-width:30%">
- <p > <span class="w3-text-red"> Name 	</span></p>
-	 <p>	{{name}} </p>
+	<footer class="w3-container w3-light-gray w3-row w3-center"  style="padding:0px 8px;margin:w3-left;overflow :auto; word-break: break-all">
+ <div class="w3-container w3-quarter" style="padding:0px 8px;">
+ <p style="margin:0"> <span class="w3-text-red"> Name 	</span></p>
+	 <p style="margin:0 0 8px">	{{name}} </p>
 	 </div>
-  <div class="w3-container w3-cell" style="padding:0px 8px; min-width:30%">
- <p> <span class="w3-text-red"> email </span></p>
- <p> <a href="mailto:{{email}}?subject=Palar Pitch-{{title}}
+  <div class="w3-container w3-quarter" style="padding:0px 8px;">
+ <p style="margin:0"> <span class="w3-text-red"> email </span></p>
+ <p style="margin:0 0 8px"> <a href="mailto:{{email}}?subject=Palar Pitch-{{title}}
  &body=Hi, I'm interested in your listing {{title}}!">{{email}}</a></p>
 </div>
- <div class="w3-container w3-cell" style="padding:0px 8px; min-width:15%">
-<p> <span class="w3-text-red"> Auto 	</span>	</p>
-<p>{{autono}}</p>
+ <div class="w3-container w3-quarter" style="padding:0px 8px; min-width:15%">
+<p style="margin:0"> <span class="w3-text-red"> Auto 	</span>	</p>
+<p style="margin:0 0 8px">{{autono}}</p>
 </div>
- <div class="w3-container w3-cell" style="padding:0px 8px; min-width:25%">
- <p> <span class="w3-text-red"> mobile:</span> </p>
- <p><a href="tel:{{mobile}}">	{{mobile}}</a></p>
+ <div class="w3-container w3-quarter" style="padding:0px 8px; min-width:25%">
+ <p style="margin:0"> <span class="w3-text-red"> mobile:</span> </p>
+ <p style="margin:0 0 8px"><a href="tel:{{mobile}}">	{{mobile}}</a></p>
 </div>
  </footer>
 </div>
