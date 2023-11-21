@@ -27,6 +27,7 @@
 		<meta name="msapplication-TileColor" content="#ffffff">
 		<meta name="msapplication-TileImage" content="ms-icon-144x144.png">
 		<meta name="theme-color" content="#ffffff">
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.1.0/papaparse.min.js'></script>
 	</head>
 <body>
 	<div class="container" style="max-width:1100px; min-width:360px;margin:auto">
@@ -167,8 +168,14 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      var URL = "1S6fHwcPpgvoLXjTH1-aEoG7t9wYvn2UZZEdguLvQH-Q"
-      Tabletop.init( { key: URL, callback: showInfo, simpleSheet: true } )
+        Papa.parse('https://docs.google.com/spreadsheets/d/e/2PACX-1vStq8WtH_zPJ-V8aMBgaD9BLdYlHeOLrKbHE792i_YXoH2remV21uoh9Tl7zyrxk_yxOG8d4yd49BAB/pub?gid=1970048890&single=true&output=csv', {
+          download: true,
+          header: true,
+          complete: function(results) {
+            var data = results.data
+            console.log(data)
+          }
+    })
     })
 
     function showInfo(data) {
